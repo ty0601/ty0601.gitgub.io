@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <link rel="stylesheet" href="styles.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的網站標題</title>
+  <title>李易宗的網站</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,6 +19,49 @@
     .content {
       margin-top: 20px;
     }
+    /* Profile Section */
+    .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+    /* Visitor Counter */
+    .visitor-counter {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+    /* Message Board */
+    .message-board {
+      margin-top: 30px;
+    }
+    .message-board form {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .message-board input[type="text"] {
+      padding: 8px;
+      width: 70%;
+      max-width: 300px;
+    }
+    .message-board button {
+      padding: 8px 12px;
+      margin-left: 5px;
+    }
+    .message-board ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .message-board li {
+      background: #e8e8e8;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
@@ -27,7 +70,51 @@
     <h1>李易宗的網站</h1>
   </header>
   <div class="content">
-    <p>資安所碩一 學號：R13921A12</p>
+    <!-- Profile Section with Photo and Introduction -->
+    <div class="profile">
+      <img src="tommy.jpg" alt="我的照片">
+      <p>你好，我是李易宗，一名資安所碩士生。歡迎來到我的個人網站！</p>
+    </div>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+      訪客計數器：<span id="visitorCounter">0</span>
+    </div>
+
+    <!-- Message Board Section -->
+    <div class="message-board">
+      <h2>留言板</h2>
+      <form id="messageForm">
+        <input type="text" id="messageInput" placeholder="請留下您的訊息" required>
+        <button type="submit">送出</button>
+      </form>
+      <ul id="messageList"></ul>
+    </div>
   </div>
+
+  <script>
+    // Visitor counter (resets on page refresh)
+    let visitorCount = 0;
+    window.addEventListener("load", function() {
+      visitorCount++;
+      document.getElementById("visitorCounter").innerText = visitorCount;
+    });
+
+    // Message board functionality
+    const messageForm = document.getElementById("messageForm");
+    const messageInput = document.getElementById("messageInput");
+    const messageList = document.getElementById("messageList");
+
+    messageForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const message = messageInput.value.trim();
+      if (message !== "") {
+        const li = document.createElement("li");
+        li.textContent = message;
+        messageList.appendChild(li);
+        messageInput.value = "";
+      }
+    });
+  </script>
 </body>
 </html>
